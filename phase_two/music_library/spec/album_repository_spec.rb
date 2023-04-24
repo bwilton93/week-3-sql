@@ -27,4 +27,11 @@ describe AlbumRepository do
     expect(albums[1].release_year).to eq "2023"
     expect(albums[1].artist_id).to eq "2"
   end
+
+  it "fetches album when given an album ID" do
+    repo = AlbumRepository.new
+
+    album = repo.find_by_id(1)
+    expect(album.title).to eq "Album 1"
+  end
 end

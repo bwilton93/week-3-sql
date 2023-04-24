@@ -20,4 +20,18 @@ class AlbumRepository
 
     return albums
   end
+
+  def find_by_id(id)
+    sql = "SELECT * FROM albums WHERE id = #{id}"
+    result = DatabaseConnection.exec_params(sql, [])
+
+    album = Album.new
+    
+    album.id = result.first["id"]
+    album.title = result.first["title"]
+    album.release_year = result.first["release_year"]
+    album.artist_id = result.first["artist_id".to_i]
+
+    return album
+  end
 end

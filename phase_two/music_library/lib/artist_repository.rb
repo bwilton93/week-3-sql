@@ -26,7 +26,7 @@ class ArtistRepository
     
     artist = Artist.new
     
-    artist.id = result["id".to_i]
+    artist.id = result.first["id"]
     artist.name = result.first['name']
     artist.genre = result.first['genre']
 
