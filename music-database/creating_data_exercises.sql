@@ -9,8 +9,15 @@ UPDATE albums SET artist_id = (SELECT id FROM artists WHERE name = 'Massive Atta
   WHERE title = 'Mezzanine';
 
 -- Insert a new artist of your choice, and a new album related to that artist (here's an idea, if you can't pick one).
+INSERT INTO artists
+  (name, genre)
+  VALUES('King Gizzard and the Lizard Wizard', 'Rock / Alternative');
 
+INSERT INTO albums
+  (title, release_year, artist_id)
+  VALUES('Nonagon Infinity', 2016, (SELECT id FROM artists WHERE name = 'King Gizzard and the Lizard Wizard'));
 
 -- Then run a SELECT query to check the new artist is now in the table.
-
+SELECT * FROM artists;
+SELECT * FROM albums;
 
