@@ -8,3 +8,5 @@ result = DatabaseConnection.exec_params(sql, [])
 result.each do |record|
   p record
 end
+
+# hello
