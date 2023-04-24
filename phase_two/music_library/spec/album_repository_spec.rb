@@ -17,18 +17,14 @@ describe AlbumRepository do
     albums = repo.all
     expect(albums.length).to eq 2
     
-    it "gets the first album" do
-      expect(albums[0].id).to eq "1"
-      expect(albums[0].title).to eq "Album 1"
-      expect(albums[0].release_year).to eq "2022"
-      expect(albums[0].artist_id).to eq "1"
-    end
-    
-    it "gets the second album" do
-      expect(albums[1].id).to eq "2"
-      expect(albums[1].title).to eq "Album 2"
-      expect(albums[1].release_year).to eq "2023"
-      expect(albums[1].artist_id).to eq "2"
-    end
+    expect(albums[0].id).to eq "1"
+    expect(albums[0].title).to eq "Album 1"
+    expect(albums[0].release_year).to eq "2022"
+    expect(albums[0].artist_id).to eq "1"
+  
+    expect(albums[1].id).to eq "2"
+    expect(albums[1].title).to eq "Album 2"
+    expect(albums[1].release_year).to eq "2023"
+    expect(albums[1].artist_id).to eq "2"
   end
 end
