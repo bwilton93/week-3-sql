@@ -40,8 +40,8 @@ TRUNCATE TABLE albums RESTART IDENTITY; -- replace with your own table name.
 -- Below this line there should only be `INSERT` statements.
 -- Replace these statements with your own seed data.
 
-INSERT INTO albums (title, release_year, artist_id) VALUES ('David song', 2022, 1);
-INSERT INTO albums (title, release_year, artist_id) VALUES ('Anna song', 2022, 2);
+INSERT INTO albums (title, release_year, artist_id) VALUES ('Album 1', 2022, 1);
+INSERT INTO albums (title, release_year, artist_id) VALUES ('Album 2', 2023, 2);
 ```
 
 Run this SQL file on the database to truncate (empty) the table, and insert the seed data. Be mindful of the fact any existing records in the table will be deleted.
@@ -129,12 +129,14 @@ class AlbumRepository
 
     # Returns a single Album object.
   end
+
   def find_by_title(str)
     # Executes the SQL query:
     # SELECT * FROM albums WHERE title=str;
 
     # Returns a single Album object.
   end
+
   def find_by_release_year(year)
     # Executes the SQL query:
     # SELECT * FROM albums WHERE release_year = year;
@@ -142,10 +144,10 @@ class AlbumRepository
     # Returns an array Album object.
   end
 
-  def create(album)
+  def create(title, release_year, artist_id)
   # INSERT INTO albums
-  # (title, release_year)
-  # VALUES(album.name, album.release_year)
+  # (title, release_year, artist_id)
+  # VALUES(name, release_year, artist_id)
   # returns nothing
   end
 
@@ -171,34 +173,88 @@ These examples will later be encoded as RSpec tests.
 # EXAMPLES
 
 # 1
-# Get all students
+# Get all albums
 
-repo = StudentRepository.new
+repo = AlbumRepository.new
 
-students = repo.all
+albums = repo.all
 
-students.length # =>  2
+albums.length # =>  2
 
-students[0].id # =>  1
-students[0].name # =>  'David'
-students[0].cohort_name # =>  'April 2022'
+albums[0].id # =>  1
+albums[0].title # =>  'Album 1'
+albums[0].release_year # =>  '2022'
+albums[0].artist_id # =>  1
 
-students[1].id # =>  2
-students[1].name # =>  'Anna'
-students[1].cohort_name # =>  'May 2022'
+albums[1].id # =>  2
+albums[1].title # =>  'Album 2'
+albums[1].release_year # =>  '2023'
+albums[1].artist_id # => 2
 
 # 2
-# Get a single student
+# Get a single album by id
 
-repo = StudentRepository.new
+repo = AlbumRepository.new
 
-student = repo.find(1)
+album = repo.find_by_id(1)
 
-student.id # =>  1
-student.name # =>  'David'
-student.cohort_name # =>  'April 2022'
+album.id # => 1
+album.title # => 'Album 1'
+album.release_year # => '2022'
+album.artist_id # => 1
 
-# Add more examples for each method
+# 3
+# Get a single album by title
+
+repo = AlbumRepository.new
+
+album = repo.find_by_title('Album 1')
+
+album.id # => 1
+album.title # => 'Album 1'
+album.release_year # => '2022'
+album.artist_id # => 1
+
+# 4
+# Deleting a single album
+repo = AlbumRepository.new
+
+albums = repo.all
+albums.length # =>  2
+
+album = repo.find_by_id(1)
+repo.delete(album)
+
+albums = repo.all
+albums.length # =>  1
+
+# 5
+# Create an album
+repo = AlbumRepository.new
+
+albums = repo.all
+albums.length # => 2
+
+repo.create('Album 3', 2023, 3)
+
+albums = repo.all
+albums.length # => 3
+
+albums[2].id # =>  3
+albums[2].title # =>  'Album 3'
+albums[2].release_year # =>  '2023'
+albums[2].artist_id # => 3
+
+# 6
+# Update release year
+repo = AlbumRepository.new
+
+album = repo.find_by_id(1)
+repo.update_release_year(album, 2020)
+
+albums = repo.all
+
+repo.find_by_id(1).release_year # =>  '2020'
 ```
 
 Encode this example as a test.
