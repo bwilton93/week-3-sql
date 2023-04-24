@@ -71,13 +71,16 @@ describe AlbumRepository do
       expect(albums[-1].release_year). to eq "2022"
     end
   end
+
+  it "can delete an album from the database" do
+    repo = AlbumRepository.new
+    album_id = 1
+    repo.delete(album_id)
+
+    albums = repo.all
+    expect(albums.length).to eq 1
+  end
 end
-
-
-# def update_release_year(album, year)
-# # UPDATE albums SET release_year = year  WHERE id = album.id
-# # returns nothing
-# end
 
 # def delete(album)
 # # DELETE FROM albums WHERE id = album.id
