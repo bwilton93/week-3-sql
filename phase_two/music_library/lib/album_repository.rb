@@ -68,4 +68,9 @@ class AlbumRepository
 
     DatabaseConnection.exec_params(sql, [])
   end
+
+  def update_release_year(album, year)
+    sql = "UPDATE albums SET release_year = #{year} WHERE title = '#{album}';"
+    DatabaseConnection.exec_params(sql, [])
+  end
 end
