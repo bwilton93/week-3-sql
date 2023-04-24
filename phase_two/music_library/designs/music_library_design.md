@@ -13,10 +13,10 @@ Otherwise, [follow this recipe to design and create the SQL schema for your tabl
 ```
 # EXAMPLE
 
-Table: students
+Table: albums
 
 Columns:
-id | name | cohort_name
+id | title | release_year | artist_id
 ```
 
 ## 2. Create Test SQL seeds
@@ -35,19 +35,19 @@ If seed data is provided (or you already created it), you can skip this step.
 -- so we can start with a fresh state.
 -- (RESTART IDENTITY resets the primary key)
 
-TRUNCATE TABLE students RESTART IDENTITY; -- replace with your own table name.
+TRUNCATE TABLE albums RESTART IDENTITY; -- replace with your own table name.
 
 -- Below this line there should only be `INSERT` statements.
 -- Replace these statements with your own seed data.
 
-INSERT INTO students (name, cohort_name) VALUES ('David', 'April 2022');
-INSERT INTO students (name, cohort_name) VALUES ('Anna', 'May 2022');
+INSERT INTO albums (title, release_year, artist_id) VALUES ('David song', 2022, 1);
+INSERT INTO albums (title, release_year, artist_id) VALUES ('Anna song', 2022, 2);
 ```
 
 Run this SQL file on the database to truncate (empty) the table, and insert the seed data. Be mindful of the fact any existing records in the table will be deleted.
 
 ```bash
-psql -h 127.0.0.1 your_database_name < seeds_{table_name}.sql
+psql -h 127.0.0.1 music_library_test < seeds_albums.sql
 ```
 
 ## 3. Define the class names
@@ -60,12 +60,12 @@ Usually, the Model class name will be the capitalised table name (single instead
 
 # Model class
 # (in lib/student.rb)
-class Student
+class Album
 end
 
 # Repository class
 # (in lib/student_repository.rb)
-class StudentRepository
+class AlbumRepository
 end
 ```
 
@@ -80,10 +80,10 @@ Define the attributes of your Model class. You can usually map the table columns
 # Model class
 # (in lib/student.rb)
 
-class Student
+class Album
 
   # Replace the attributes by your own columns.
-  attr_accessor :id, :name, :cohort_name
+  attr_accessor :id, :title, :release_year, :artist_id
 end
 
 # The keyword attr_accessor is a special Ruby feature
@@ -110,36 +110,54 @@ Using comments, define the method signatures (arguments and return value) and wh
 # Repository class
 # (in lib/student_repository.rb)
 
-class StudentRepository
+class AlbumRepository
 
   # Selecting all records
   # No arguments
   def all
     # Executes the SQL query:
-    # SELECT id, name, cohort_name FROM students;
-
-    # Returns an array of Student objects.
+    # SELECT * FROM albums;
+    
+    # Returns an array of Album objects.
   end
 
   # Gets a single record by its ID
   # One argument: the id (number)
-  def find(id)
+  def find_by_id(num)
     # Executes the SQL query:
-    # SELECT id, name, cohort_name FROM students WHERE id = $1;
+    # SELECT * FROM albums WHERE id = num;
 
-    # Returns a single Student object.
+    # Returns a single Album object.
+  end
+  def find_by_title(str)
+    # Executes the SQL query:
+    # SELECT * FROM albums WHERE title=str;
+
+    # Returns a single Album object.
+  end
+  def find_by_release_year(year)
+    # Executes the SQL query:
+    # SELECT * FROM albums WHERE release_year = year;
+
+    # Returns an array Album object.
   end
 
-  # Add more methods below for each operation you'd like to implement.
+  def create(album)
+  # INSERT INTO albums
+  # (title, release_year)
+  # VALUES(album.name, album.release_year)
+  # returns nothing
+  end
 
-  # def create(student)
-  # end
+  def update_release_year(album, year)
+  # UPDATE albums SET release_year = year  WHERE id = album.id
+  # returns nothing
+  end
 
-  # def update(student)
-  # end
-
-  # def delete(student)
-  # end
+  def delete(album)
+  # DELETE FROM albums WHERE id = album.id
+  # returns nothing
+  end
 end
 ```
 
