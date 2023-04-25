@@ -1,0 +1,3 @@
+class RecipesDirectory
+  
+end
