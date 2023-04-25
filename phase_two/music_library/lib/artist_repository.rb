@@ -21,8 +21,9 @@ class ArtistRepository
   end
 
   def find_by_id(id)
-    sql = "SELECT * FROM artists WHERE id = #{id}"
-    result = DatabaseConnection.exec_params(sql, [])
+    sql = "SELECT * FROM artists WHERE id = $1"
+
+    result = DatabaseConnection.exec_params(sql, [id])
     
     artist = Artist.new
     
