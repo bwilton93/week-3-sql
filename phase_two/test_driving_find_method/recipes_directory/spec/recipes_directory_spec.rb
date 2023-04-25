@@ -17,14 +17,14 @@ describe RecipesDirectory do
     recipes = repo.all
     expect(recipes.length).to eq 5
     
-    expect(albums.first.id).to eq "1"
-    expect(albums.first.name).to eq "Pepperoni Pizza"
-    expect(albums.first.cooking_time).to eq 10
-    expect(albums.first.rating).to eq 5
+    expect(recipes.first.id).to eq "1"
+    expect(recipes.first.name).to eq "Pepperoni Pizza"
+    expect(recipes.first.cooking_time).to eq 10
+    expect(recipes.first.rating).to eq 5
   
-    expect(albums.last.id).to eq "5"
-    expect(albums.last.name).to eq "Microwave Meal"
-    expect(albums.first.cooking_time).to eq 4
-    expect(albums.last.rating).to eq 2
+    expect(recipes.last.id).to eq "5"
+    expect(recipes.last.name).to eq "Microwave Meal"
+    expect(recipes.last.cooking_time).to eq 4
+    expect(recipes.last.rating).to eq 2
   end
 end
