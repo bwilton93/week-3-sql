@@ -23,8 +23,8 @@ class RecipesDirectory
 
   def find_by_id(id)
     sql = "SELECT * FROM recipes WHERE id = $1;"
-    result = DatabaseConnection.exec_params(sql, [id]).first
 
+    result = DatabaseConnection.exec_params(sql, [id]).first
     
     recipe = Recipe.new
 
