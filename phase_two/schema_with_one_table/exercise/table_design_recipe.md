@@ -27,11 +27,11 @@ Put the different nouns in this table. Replace the example with your own nouns.
 
 | Record                | Properties          |
 | --------------------- | ------------------  |
-| album                 | title, release year
+| student               | name, cohort        |
 
-Name of the table (always plural): `albums` 
+Name of the table (always plural): `students` 
 
-Column names: `title`, `release_year`
+Column names: `name`, `cohort`
 
 ## 3. Decide the column types.
 
@@ -45,27 +45,27 @@ Remember to **always** have the primary key `id` as a first column. Its type wil
 # EXAMPLE:
 
 id: SERIAL
-title: text
-release_year: int
+name: text
+cohort: text
 ```
 
 ## 4. Write the SQL.
 
 ```sql
 -- EXAMPLE
--- file: albums_table.sql
+-- file: students_table.sql
 
 -- Replace the table name, columm names and types.
 
-CREATE TABLE albums (
+CREATE TABLE students (
   id SERIAL PRIMARY KEY,
-  title text,
-  release_year int
+  name text,
+  cohort text
 );
 ```
 
 ## 5. Create the table.
 
 ```bash
-psql -h 127.0.0.1 database_name < albums_table.sql
+psql -h 127.0.0.1 students < students_table.sql
 ```
