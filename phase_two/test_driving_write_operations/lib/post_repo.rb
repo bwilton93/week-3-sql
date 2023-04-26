@@ -43,9 +43,25 @@ class PostRepo
     DatabaseConnection.exec_params(sql, params)
   end
 
-  def delete
+  def delete(id)
+    sql = "DELETE FROM posts WHERE id = $1;"
+
+    DatabaseConnection.exec_params(sql, [id])
   end
 
-  def update
+  def update(id, post)
+    post_old = find(id)
+
+    title = post.title.nil? ? post_old.title : post.title
+    content = post.content.nil? ? post_old.content : post.content
+    number_of_views = post.number_of_views.nil? ? post_old.number_of_views : post.number_of_views
+    user_account_id = post.user_account_id.nil? ? post_old.user_account_id : post.user_account_id
+
+    params = [id, title, content, number_of_views, user_account_id]
+
+    sql = "UPDATE posts SET title=$2, content=$3, number_of_views=$4, user_account_id=$5
+      WHERE id=$1;"
+
+    DatabaseConnection.exec_params(sql, params)
   end
 end
