@@ -30,7 +30,12 @@ class AccountRepo
     return account
   end
 
-  def create
+  def create(account)
+    sql = "INSERT INTO user_accounts (email_address, username) VALUES ($1, $2);"
+
+    params = [account.email_address, account.username]
+
+    DatabaseConnection.exec_params(sql, params)
   end
 
   def delete

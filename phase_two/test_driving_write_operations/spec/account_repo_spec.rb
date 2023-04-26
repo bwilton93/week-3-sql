@@ -29,39 +29,38 @@ describe AccountRepo do
   end
   
   describe "#find" do
-  it "returns a single account from the accounts table" do
-    repo = AccountRepo.new
-    
-    account = repo.find(1)
-    
-    expect(account.id).to eq "1"
-    expect(account.email_address).to eq "Email 1"
-    expect(account.username).to eq "User 1" 
-    
-    account = repo.find(2)
-    
-    expect(account.id).to eq "2"
-    expect(account.email_address).to eq "Email 2"
-    expect(account.username).to eq "User 2" 
+    it "returns a single account from the accounts table" do
+      repo = AccountRepo.new
+      
+      account = repo.find(1)
+      
+      expect(account.id).to eq "1"
+      expect(account.email_address).to eq "Email 1"
+      expect(account.username).to eq "User 1" 
+      
+      account = repo.find(2)
+      
+      expect(account.id).to eq "2"
+      expect(account.email_address).to eq "Email 2"
+      expect(account.username).to eq "User 2" 
+    end
   end
-end
 
-describe "#create" do
-it "creates a new account in the accounts table" do
-  repo = AccountRepo.new
-  
-  account = Account.new
-  account.id = 3
-  account.email_address = "Email 3"
-  account.username = "User 3"
-  
-  repo.create(account)
-  
-  accounts = repo.all
+  describe "#create" do
+    it "creates a new account in the accounts table" do
+      repo = AccountRepo.new
+      
+      account = Account.new
+      account.email_address = "Email 3"
+      account.username = "User 3"
+      
+      repo.create(account)
+      
+      accounts = repo.all
 
-  expect(accounts.last.id).to eq "3"
-  expect(accounts.last.email_address).to eq "Email 3"
-  expect(accounts.last.username).to eq "User 3"
-end
-end
+      expect(accounts.last.id).to eq "3"
+      expect(accounts.last.email_address).to eq "Email 3"
+      expect(accounts.last.username).to eq "User 3"
+    end
+  end
 end
