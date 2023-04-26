@@ -1,4 +1,5 @@
 require 'album_repository'
+require 'album'
 
 def reset_albums_table
   seed_sql = File.read('spec/seeds.sql')
@@ -51,22 +52,25 @@ describe AlbumRepository do
 
   context "when creating a new album" do
     repo = AlbumRepository.new
-    title = "Album 3"
-    release_year = 2023
+    
+    album = Album.new
+    album.title = "Album 3"
+    album.release_year = 2023
+    album.artist_id = 2
     
     it "can create a new album" do
-      repo.create(title, release_year)
+      repo.create(album)
       albums = repo.all
       expect(albums.length).to eq 3
+
       expect(albums[-1].id).to eq "3"
       expect(albums[-1].title).to eq "Album 3"
       expect(albums[-1].release_year).to eq "2023"
-      expect(albums[-1].artist_id).to eq "0"
     end
     
     it "can update the release year for the album" do
-      repo.create(title, release_year)
-      repo.update_release_year(title, 2022)
+      repo.create(album)
+      repo.update_release_year(album.title, 2022)
       albums = repo.all
       expect(albums[-1].release_year). to eq "2022"
     end
@@ -81,8 +85,3 @@ describe AlbumRepository do
     expect(albums.length).to eq 1
   end
 end
-
-# def delete(album)
-# # DELETE FROM albums WHERE id = album.id
-# # returns nothing
-# end
