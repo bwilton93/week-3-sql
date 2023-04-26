@@ -35,7 +35,12 @@ class PostRepo
     return post
   end
 
-  def create
+  def create(post)
+    sql = "INSERT INTO posts (title, content, number_of_views, user_account_id) VALUES ($1, $2, $3, $4);"
+
+    params = [post.title, post.content, post.number_of_views, post.user_account_id]
+
+    DatabaseConnection.exec_params(sql, params)
   end
 
   def delete
