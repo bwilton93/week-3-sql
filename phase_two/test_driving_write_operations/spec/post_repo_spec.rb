@@ -42,7 +42,26 @@ describe PostRepo do
 
   describe "#create" do
     it "creates a new post in the post table" do
-      
+      repo = PostRepo.new
+
+      new_post = Post.new
+      new_post.title = "Post 2"
+      new_post.content = "More content"
+      new_post.number_of_views = 9001
+      new_post.user_account_id = 2
+
+      repo.create(new_post)
+
+      posts = repo.all
+
+      post = posts.last
+
+      expect(posts.length).to eq 2
+      expect(post.id).to eq "2"
+      expect(post.title).to eq "Post 2"
+      expect(post.content).to eq "More content"
+      expect(post.number_of_views).to eq "9001"
+      expect(post.user_account_id).to eq "2"
     end
   end
 end
