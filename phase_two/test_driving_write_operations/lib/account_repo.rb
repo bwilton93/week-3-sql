@@ -42,6 +42,14 @@ class AccountRepo
     sql =  "DELETE FROM user_accounts WHERE id = $1;"
 
     params = [id]
+
+    DatabaseConnection.exec_params(sql, params)
+  end
+  
+  def update(account)
+    sql = "UPDATE user_accounts SET email_address = $2, username = $3 WHERE id = $1;"
+    
+    params = [account.id, account.email_address, account.username]
     
     DatabaseConnection.exec_params(sql, params)
   end

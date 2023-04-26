@@ -45,7 +45,7 @@ describe AccountRepo do
       expect(account.username).to eq "User 2" 
     end
   end
-
+  
   describe "#create" do
     it "creates a new account in the accounts table" do
       repo = AccountRepo.new
@@ -57,26 +57,43 @@ describe AccountRepo do
       repo.create(account)
       
       accounts = repo.all
-
+      
       expect(accounts.last.id).to eq "3"
       expect(accounts.last.email_address).to eq "Email 3"
       expect(accounts.last.username).to eq "User 3"
     end
   end
-
+  
   describe "#delete" do
     it "deletes a user from the accounts table" do
       repo = AccountRepo.new
       repo.delete(1)
-
+      
       records = repo.all
       remaining_user = records.first
-
+      
       expect(records.length).to eq 1
-
+      
       expect(remaining_user.id).to eq "2"
       expect(remaining_user.email_address).to eq "Email 2"
       expect(remaining_user.username).to eq "User 2"
+    end
+  end
+  
+  describe "#update" do
+    it "updates a user on the accounts table" do
+      account = Account.new
+      account.id = 2
+      account.email_address = "Email 2.1"
+      account.username = "User 2"
+      
+      repo = AccountRepo.new
+      repo.update(account)
+      
+      account = repo.find(2)
+      
+      expect(account.email_address).to eq "Email 2.1"
+      expect(account.username).to eq "User 2" 
     end
   end
 end
