@@ -63,4 +63,20 @@ describe AccountRepo do
       expect(accounts.last.username).to eq "User 3"
     end
   end
+
+  describe "#delete" do
+    it "deletes a user from the accounts table" do
+      repo = AccountRepo.new
+      repo.delete(1)
+
+      records = repo.all
+      remaining_user = records.first
+
+      expect(records.length).to eq 1
+
+      expect(remaining_user.id).to eq "2"
+      expect(remaining_user.email_address).to eq "Email 2"
+      expect(remaining_user.username).to eq "User 2"
+    end
+  end
 end

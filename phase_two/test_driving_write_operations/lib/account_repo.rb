@@ -37,7 +37,12 @@ class AccountRepo
 
     DatabaseConnection.exec_params(sql, params)
   end
+  
+  def delete(id)
+    sql =  "DELETE FROM user_accounts WHERE id = $1;"
 
-  def delete
+    params = [id]
+    
+    DatabaseConnection.exec_params(sql, params)
   end
 end
