@@ -11,3 +11,8 @@ puts "#{post.title} - #{post.content}"
 puts "-" * 25
 puts "Comments"
 puts "-" * 25
+
+comments = post.comments
+comments.each do |comment|
+  puts "#{comment.id}. #{comment.content} - #{comment.author_name}"
+end
