@@ -18,15 +18,15 @@ describe AlbumRepository do
     albums = repo.all
     expect(albums.length).to eq 2
     
-    expect(albums[0].id).to eq "1"
+    expect(albums[0].id).to eq 1
     expect(albums[0].title).to eq "Album 1"
-    expect(albums[0].release_year).to eq "2022"
-    expect(albums[0].artist_id).to eq "1"
+    expect(albums[0].release_year).to eq 2022
+    expect(albums[0].artist_id).to eq 1
   
-    expect(albums[1].id).to eq "2"
+    expect(albums[1].id).to eq 2
     expect(albums[1].title).to eq "Album 2"
-    expect(albums[1].release_year).to eq "2023"
-    expect(albums[1].artist_id).to eq "2"
+    expect(albums[1].release_year).to eq 2023
+    expect(albums[1].artist_id).to eq 2
   end
 
   it "fetches album when given an album ID" do
@@ -40,14 +40,14 @@ describe AlbumRepository do
     repo = AlbumRepository.new
 
     album = repo.find_by_name("Album 1")
-    expect(album.id).to eq "1"
+    expect(album.id).to eq 1
   end
   
   it "fetches album when passed release year" do
     repo = AlbumRepository.new
   
     album = repo.find_by_release_year(2022)
-    expect(album.id).to eq "1"
+    expect(album.id).to eq 1
   end
 
   context "when creating a new album" do
@@ -63,16 +63,16 @@ describe AlbumRepository do
       albums = repo.all
       expect(albums.length).to eq 3
 
-      expect(albums[-1].id).to eq "3"
+      expect(albums[-1].id).to eq 3
       expect(albums[-1].title).to eq "Album 3"
-      expect(albums[-1].release_year).to eq "2023"
+      expect(albums[-1].release_year).to eq 2023
     end
     
     it "can update the release year for the album" do
       repo.create(album)
       repo.update_release_year(album.title, 2022)
       albums = repo.all
-      expect(albums[-1].release_year). to eq "2022"
+      expect(albums[-1].release_year). to eq 2022
     end
   end
 

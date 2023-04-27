@@ -10,10 +10,10 @@ class AlbumRepository
     result_set.each do |record|
       album = Album.new
 
-      album.id = record['id']
+      album.id = record['id'].to_i
       album.title = record['title']
-      album.release_year = record['release_year']
-      album.artist_id = record['artist_id']
+      album.release_year = record['release_year'].to_i
+      album.artist_id = record['artist_id'].to_i
 
       albums << album
     end
@@ -28,10 +28,10 @@ class AlbumRepository
     
     album = Album.new
     
-    album.id = result.first["id"]
+    album.id = result.first["id"].to_i
     album.title = result.first["title"]
-    album.release_year = result.first["release_year"]
-    album.artist_id = result.first["artist_id"]
+    album.release_year = result.first["release_year"].to_i
+    album.artist_id = result.first["artist_id"].to_i
     
     return album
   end
@@ -42,10 +42,10 @@ class AlbumRepository
 
     album = Album.new
 
-    album.id = result.first["id"]
+    album.id = result.first["id"].to_i
     album.title = result.first["title"]
-    album.release_year = result.first["release_year"]
-    album.artist_id = result.first["artist_id"]
+    album.release_year = result.first["release_year"].to_i
+    album.artist_id = result.first["artist_id"].to_i
 
     return album
   end
@@ -56,10 +56,10 @@ class AlbumRepository
 
     album = Album.new
 
-    album.id = result.first["id"]
+    album.id = result.first["id"].to_i
     album.title = result.first["title"]
-    album.release_year = result.first["release_year"]
-    album.artist_id = result.first["artist_id"]
+    album.release_year = result.first["release_year"].to_i
+    album.artist_id = result.first["artist_id"].to_i
 
     return album
   end
