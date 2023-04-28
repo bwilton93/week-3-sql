@@ -11,7 +11,14 @@ RSpec.describe PostRepo do
     reset_tables
   end
 
-  it "first test" do
+  it "returns all posts when passed a tag name" do
+    repo = PostRepo.new
+    
+    name = 'coding'
+    posts = repo.find_by_tag(name)
 
+    expect(posts.length).to eq 4
+    expect(posts.first.title).to eq 'How to use Git'
+    expect(posts.last.title).to eq 'SQL basics'
   end
 end
