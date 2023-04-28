@@ -19,4 +19,3 @@ RSpec.describe CohortRepository do
     expect(cohort.students.length).to eq 2
   end
 end
-
