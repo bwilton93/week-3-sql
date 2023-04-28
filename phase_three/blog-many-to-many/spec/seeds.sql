@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS "public"."posts";
+DROP TABLE IF EXISTS "public"."posts" CASCADE;
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
 -- Table Definition
@@ -8,7 +8,7 @@ CREATE TABLE "public"."posts" (
     PRIMARY KEY ("id")
 );
 
-DROP TABLE IF EXISTS "public"."posts_tags";
+DROP TABLE IF EXISTS "public"."posts_tags" CASCADE;
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
 -- Table Definition
@@ -17,7 +17,7 @@ CREATE TABLE "public"."posts_tags" (
     "tag_id" int4
 );
 
-DROP TABLE IF EXISTS "public"."tags";
+DROP TABLE IF EXISTS "public"."tags" CASCADE;
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
 -- Table Definition
@@ -26,6 +26,8 @@ CREATE TABLE "public"."tags" (
     "name" text,
     PRIMARY KEY ("id")
 );
+
+TRUNCATE TABLE posts, posts_tags, tags RESTART IDENTITY;
 
 INSERT INTO "public"."posts" ("title") VALUES
 ('How to use Git'),
